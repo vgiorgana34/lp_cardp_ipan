@@ -407,9 +407,9 @@ a { text-decoration: none; color: inherit; }
 .doctor-text p { font-size: 0.98rem; color: var(--color-text-light); line-height: 1.75; margin-bottom: 14px; }
 .doctor-text .italic { font-style: italic; color: var(--color-text); }
 .credentials-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px; }
-.cred-item { text-align: center; padding: 12px 6px; border-left: 1px solid var(--color-border); }
+.cred-item { text-align: center; padding: 16px 10px; border-left: 1px solid var(--color-border); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 12px; }
 .cred-item:first-child { border-left: none; }
-.cred-item img { max-height: 52px; max-width: 80%; margin: 0 auto 8px; object-fit: contain; }
+.cred-item img { width: 100%; max-width: 170px; height: auto; aspect-ratio: 492 / 200; object-fit: contain; display: block; }
 .cred-item span { display: block; font-size: 0.78rem; color: var(--color-text-light); line-height: 1.4; }
 
 /* --- TESTIMONIALS --- */
@@ -536,18 +536,155 @@ a { text-decoration: none; color: inherit; }
 /* --- FOOTER --- */
 .footer-section {
   background: var(--color-bg-dark);
-  padding: 56px 0 16px;
+  padding: 48px 0 24px;
   text-align: center;
   color: #fff;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
-.footer-logo-img { height: 64px; margin: 0 auto 12px; object-fit: contain; }
-.footer-section .tagline { color: rgba(255,255,255,0.6); margin-bottom: 20px; font-size: 0.95rem; }
-.footer-section .btn-accent { margin-bottom: 28px; }
-.footer-legal { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
-.footer-legal strong { color: rgba(255,255,255,0.65); }
-.footer-bottom { background: var(--color-primary-deep); padding: 14px 0; font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+.footer-logo-img { height: 64px; margin: 0 auto 10px; object-fit: contain; }
+.footer-section .tagline { color: rgba(255,255,255,0.7); margin-bottom: 22px; font-size: 1rem; }
+.footer-cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+.footer-section .btn-wa { padding: 13px 26px; font-size: 0.98rem; }
+.footer-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: #fff;
+  padding: 13px 26px;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 600;
+  border: 1.5px solid rgba(255,255,255,0.32);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.footer-call:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+.footer-call svg { width: 18px; height: 18px; }
+.footer-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.7);
+  flex-wrap: wrap;
+}
+.footer-trust .stars { color: #f5c84a; letter-spacing: 1px; font-size: 0.9rem; }
+.footer-trust strong { color: #fff; font-weight: 700; }
+.footer-legal-line {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+  line-height: 1.6;
+}
+.footer-legal-line a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,0.25);
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+.footer-legal-line a:hover { color: #fff; text-decoration-color: rgba(255,255,255,0.6); }
+.footer-legal-sep { margin: 0 8px; color: rgba(255,255,255,0.3); }
+.footer-bottom { background: var(--color-primary-deep); padding: 14px 0; font-size: 0.78rem; color: rgba(255,255,255,0.45); }
 .footer-bottom .container { display: flex; justify-content: space-between; }
+
+/* --- PRIVACY MODAL (native <dialog>) --- */
+.privacy-modal {
+  border: none;
+  padding: 0;
+  max-width: 720px;
+  width: 95vw;
+  max-height: 88vh;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  color: var(--color-text);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+.privacy-modal::backdrop {
+  background: rgba(15,30,50,0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.privacy-modal[open] { animation: privacyIn 0.25s cubic-bezier(.2,.8,.2,1); }
+@keyframes privacyIn {
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+.privacy-modal-header {
+  position: sticky; top: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 28px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 2;
+}
+.privacy-modal-header h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--color-primary);
+}
+.privacy-close {
+  appearance: none;
+  border: none;
+  background: var(--color-bg-alt);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 1.4rem; line-height: 1;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  display: flex; align-items: center; justify-content: center;
+}
+.privacy-close:hover { background: var(--color-border); color: var(--color-text); }
+.privacy-modal-body {
+  padding: 24px 28px 32px;
+  overflow-y: auto;
+  max-height: calc(88vh - 76px);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--color-text-light);
+}
+.privacy-modal-body h3 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--color-primary);
+  margin: 22px 0 8px;
+  font-weight: 700;
+}
+.privacy-modal-body h3:first-child { margin-top: 0; }
+.privacy-modal-body p { margin-bottom: 12px; }
+.privacy-modal-body ul { margin: 0 0 12px 22px; }
+.privacy-modal-body li { margin-bottom: 6px; }
+.privacy-modal-body a { color: var(--color-accent); text-decoration: underline; }
+.privacy-modal-body .meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+  margin-top: 24px; padding-top: 14px;
+}
+@media (max-width: 600px) {
+  .privacy-modal { max-height: 92vh; }
+  .privacy-modal-header { padding: 16px 20px; }
+  .privacy-modal-header h2 { font-size: 1.15rem; }
+  .privacy-modal-body { padding: 18px 20px 24px; max-height: calc(92vh - 64px); }
+}
+@media (max-width: 600px) {
+  .footer-cta-row { flex-direction: column; width: 100%; max-width: 320px; }
+  .footer-cta-row > * { width: 100%; justify-content: center; }
+  .footer-legal-line { padding: 0 20px; }
+  .footer-bottom .container { flex-direction: column; gap: 4px; align-items: center; }
+}
 
 /* --- WHATSAPP FLOAT --- */
 .wa-float {
@@ -584,7 +721,7 @@ a { text-decoration: none; color: inherit; }
   .hero-img-wrap { aspect-ratio: 16/10; max-height: 360px; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .doctor-section .container { grid-template-columns: 1fr; gap: 32px; }
-  .doctor-img { max-width: 400px; aspect-ratio: 4/3; }
+  .doctor-img { max-width: 360px; aspect-ratio: 3/4; margin: 0 auto; }
   .testimonials-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
   .steps-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
   .cta-section .container { grid-template-columns: 1fr; }
@@ -766,19 +903,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="italic anim">Estoy aquí para guiarte hacia un corazón más fuerte y saludable. Todo es más fácil, cuando sale del corazón.</p>
       <div class="credentials-row stagger">
         <div class="cred-item anim">
-          <img src="https://aigenci.sirv.com/IPAN/ABOUT-LOGO-UNAM-IPAN.avif" alt="UNAM" loading="lazy" width="80" height="52">
+          <img src="https://aigenci.sirv.com/IPAN/ABOUT-LOGO-UNAM-IPAN.avif" alt="UNAM" loading="lazy" width="170" height="69">
           <span>Universidad Nacional Autónoma de México</span>
         </div>
         <div class="cred-item anim">
-          <img src="https://aigenci.sirv.com/IPAN/ABOUT-LOGO-CMC-IPAN.avif" alt="CMC" loading="lazy" width="80" height="52">
+          <img src="https://aigenci.sirv.com/IPAN/ABOUT-LOGO-CMC-IPAN.avif" alt="CMC" loading="lazy" width="170" height="69">
           <span>Consejo Mexicano de Cardiología</span>
         </div>
         <div class="cred-item anim">
-          <img src="https://aigenci.sirv.com/IPAN/ABOUT-LOGO-STANFORD-IPAN.avif" alt="Stanford" loading="lazy" width="80" height="52">
+          <img src="https://aigenci.sirv.com/IPAN/ABOUT-LOGO-STANFORD-IPAN.avif" alt="Stanford" loading="lazy" width="170" height="69">
           <span>Stanford University</span>
         </div>
         <div class="cred-item anim">
-          <img src="https://aigenci.sirv.com/IPAN/ABOUT-LOGO-BARCELONA-IPAN.avif" alt="Barcelona" loading="lazy" width="80" height="52">
+          <img src="https://aigenci.sirv.com/IPAN/ABOUT-LOGO-BARCELONA-IPAN.avif" alt="Barcelona" loading="lazy" width="170" height="69">
           <span>Universidad de Barcelona</span>
         </div>
       </div>
@@ -799,21 +936,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="quote">"Resuelve cualquier duda de manera clara, lo explica en términos que entendamos, muestra imágenes para dar claridad a lo que dice, intenta no alertar al paciente, le da tranquilidad."</p>
         <div class="divider"></div>
         <div class="author">Mishel Feria</div>
-        <div class="source"><a href="#">Doctoralia</a> · 8 abr 2026</div>
+        <div class="source">Doctoralia ·8 abr 2026</div>
       </div>
       <div class="test-card anim">
         <div class="card-stars">★★★★★</div>
         <p class="quote">"El doctor me dio una explicación detallada y nos explica de una manera tranquila, y que es un tratamiento que requiere compromiso y constancia para poder mejorar nuestra salud."</p>
         <div class="divider"></div>
         <div class="author">Mario García</div>
-        <div class="source"><a href="#">Doctoralia</a> · 29 mar 2026</div>
+        <div class="source">Doctoralia ·29 mar 2026</div>
       </div>
       <div class="test-card anim">
         <div class="card-stars">★★★★★</div>
         <p class="quote">"Excelente atención y explicación para buscar un primer diagnóstico."</p>
         <div class="divider"></div>
         <div class="author">Paul Orozco</div>
-        <div class="source"><a href="#">Doctoralia</a> · 21 abr 2026</div>
+        <div class="source">Doctoralia ·21 abr 2026</div>
       </div>
     </div>
   </div>
@@ -943,24 +1080,112 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ============== FOOTER ============== -->
-<section class="footer-section">
+<footer class="footer-section">
   <div class="container">
-    <img class="footer-logo-img" src="/logo.png" alt="IPANCORAZON" loading="lazy" width="200" height="64">
-    <p class="tagline">¿Quieres tomar control de tu salud?</p>
-    <a href="#cta-2" class="btn-accent" data-component="hash-link">
-      Agendar una cita ahora
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.673-1.391A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.756-6.354-2.04l-.443-.34-2.793.832.884-2.87-.373-.466A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-    </a>
-    <p class="footer-legal"><strong>AVISO DE PRIVACIDAD</strong></p>
-    <p class="footer-legal">AVISO DE PUBLICIDAD: 23210520022A00189</p>
+    <img class="footer-logo-img" src="/logo-dark.png" alt="IPANCORAZON" loading="lazy" width="200" height="77">
+    <p class="tagline">¿Quieres tomar control de tu salud cardíaca?</p>
+
+    <div class="footer-cta-row">
+      <a href="https://wa.me/+525580313331/?text=Hola%2C%20vi%20el%20sitio%20en%20Google%2C%20quiero%20informaci%C3%B3n%20de%20la%20consulta." target="_blank" rel="noopener" class="btn-wa">
+        Agendar por WhatsApp
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.673-1.391A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.756-6.354-2.04l-.443-.34-2.793.832.884-2.87-.373-.466A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      </a>
+      <a href="tel:5580313331" class="footer-call">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        558 031 3331
+      </a>
+    </div>
+
+    <div class="footer-trust">
+      <span class="stars">★★★★★</span>
+      <strong>4.9</strong>
+      <span>192 opiniones verificadas en Doctoralia</span>
+    </div>
+
+    <p class="footer-legal-line">
+      <a href="#aviso-privacidad" data-privacy-trigger>Aviso de Privacidad</a><span class="footer-legal-sep">·</span>Aviso de Publicidad: 23210520022A00189
+    </p>
   </div>
-</section>
+</footer>
 <div class="footer-bottom">
   <div class="container">
     <span>© Created by Aigenci</span>
     <span>All rights Reserved</span>
   </div>
 </div>
+
+<!-- ============== AVISO DE PRIVACIDAD MODAL ============== -->
+<dialog id="privacy-dialog" class="privacy-modal" aria-labelledby="privacy-title">
+  <div class="privacy-modal-header">
+    <h2 id="privacy-title">Aviso de Privacidad</h2>
+    <button type="button" class="privacy-close" data-privacy-close aria-label="Cerrar aviso de privacidad">×</button>
+  </div>
+  <div class="privacy-modal-body">
+    <p>De conformidad con la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares</strong> (LFPDPPP), su Reglamento, y demás disposiciones aplicables, ponemos a su disposición el presente Aviso de Privacidad.</p>
+
+    <h3>1. Identidad y domicilio del responsable</h3>
+    <p>El responsable del tratamiento de sus datos personales es el <strong>Dr. Luis Enrique Estrada</strong>, cardiólogo intervencionista (en adelante, "el Responsable"), con domicilio en <strong>Torres Médicas, Torre 1, Piso P, Consultorio 1608, Anillo Periférico Ecológico #3507, San Andrés Cholula, Puebla</strong>, México.</p>
+    <p>Contacto para asuntos de privacidad: <a href="https://wa.me/+525580313331" target="_blank" rel="noopener">+52 55 8031 3331</a> (WhatsApp) o al teléfono <a href="tel:5580313331">558 031 3331</a>.</p>
+
+    <h3>2. Datos personales que recabamos</h3>
+    <p>Para las finalidades señaladas en el presente Aviso, recabamos los siguientes datos:</p>
+    <ul>
+      <li><strong>Datos de identificación y contacto:</strong> nombre completo, edad, sexo, teléfono, correo electrónico.</li>
+      <li><strong>Datos patrimoniales o financieros:</strong> información de aseguradoras y método de pago (cuando aplique).</li>
+      <li><strong>Datos sensibles (datos de salud):</strong> historial clínico, antecedentes médicos, resultados de estudios diagnósticos, motivo de consulta, signos y síntomas, alergias, medicamentos y tratamientos.</li>
+    </ul>
+    <p>Los datos sensibles requieren su <strong>consentimiento expreso</strong>, el cual se entiende otorgado al iniciar la relación médico-paciente y al proporcionar dicha información durante la consulta.</p>
+
+    <h3>3. Finalidades del tratamiento</h3>
+    <p><strong>Finalidades primarias</strong> (necesarias para la atención médica):</p>
+    <ul>
+      <li>Brindar atención médica especializada en cardiología.</li>
+      <li>Integrar y mantener su expediente clínico conforme a la NOM-004-SSA3-2012.</li>
+      <li>Realizar diagnósticos, estudios y procedimientos médicos.</li>
+      <li>Programar y confirmar citas.</li>
+      <li>Emitir facturación y gestionar cobros y reembolsos con aseguradoras.</li>
+      <li>Cumplir con obligaciones legales sanitarias, fiscales y administrativas.</li>
+    </ul>
+    <p><strong>Finalidades secundarias</strong> (no esenciales — puede oponerse a éstas):</p>
+    <ul>
+      <li>Encuestas de satisfacción y mejora del servicio.</li>
+      <li>Envío de recordatorios de cita y seguimiento clínico vía WhatsApp/correo.</li>
+      <li>Comunicaciones informativas sobre salud cardiovascular.</li>
+    </ul>
+
+    <h3>4. Transferencias de datos</h3>
+    <p>Sus datos podrán transferirse, sin requerir su consentimiento adicional, en los siguientes casos previstos por el artículo 37 de la LFPDPPP:</p>
+    <ul>
+      <li>A laboratorios clínicos y de imagen para la realización de estudios indicados.</li>
+      <li>A hospitales asociados (Hospital Ángeles Puebla, MAC, Hospital Puebla, entre otros) cuando se requiera para procedimientos.</li>
+      <li>A las aseguradoras que usted indique para gestión de coberturas.</li>
+      <li>A autoridades sanitarias o fiscales cuando exista requerimiento legal.</li>
+    </ul>
+
+    <h3>5. Datos recabados automáticamente (cookies y analítica)</h3>
+    <p>Este sitio utiliza cookies y herramientas de medición (Google Analytics, Google Tag Manager) que recopilan datos automatizados como: dirección IP, tipo de navegador, sistema operativo, páginas visitadas, tiempo de visita y origen del tráfico (incluidas campañas de Google Ads). Estos datos se usan únicamente con fines estadísticos y de mejora del sitio.</p>
+
+    <h3>6. Derechos ARCO</h3>
+    <p>Usted tiene derecho a <strong>Acceder</strong>, <strong>Rectificar</strong>, <strong>Cancelar</strong> u <strong>Oponerse</strong> al tratamiento de sus datos, así como a <strong>revocar</strong> su consentimiento. Para ejercer cualquiera de estos derechos, envíe su solicitud por WhatsApp al <a href="https://wa.me/+525580313331" target="_blank" rel="noopener">+52 55 8031 3331</a> indicando:</p>
+    <ul>
+      <li>Su nombre completo y medio de contacto.</li>
+      <li>Documento que acredite su identidad (INE o equivalente).</li>
+      <li>Descripción clara del derecho que desea ejercer.</li>
+    </ul>
+    <p>El Responsable dará respuesta en un plazo máximo de <strong>20 días hábiles</strong>.</p>
+
+    <h3>7. Limitación de uso o divulgación</h3>
+    <p>Puede limitar el uso o divulgación de sus datos solicitándolo por los medios señalados en el apartado anterior.</p>
+
+    <h3>8. Cambios al Aviso de Privacidad</h3>
+    <p>Cualquier modificación a este Aviso será publicada en esta misma página web. Le recomendamos revisarlo periódicamente.</p>
+
+    <h3>9. Consentimiento</h3>
+    <p>Al continuar navegando en este sitio web, así como al proporcionar sus datos personales mediante WhatsApp, llamada telefónica o consulta médica, usted manifiesta su consentimiento para el tratamiento de los mismos conforme a lo establecido en el presente Aviso de Privacidad.</p>
+
+    <p class="meta">Última actualización: mayo 2026. Este aviso fue elaborado con base en la LFPDPPP y normativa aplicable en México; le recomendamos revisarlo con su asesor legal antes de uso definitivo.</p>
+  </div>
+</dialog>
 
 <!-- ============== WHATSAPP FLOAT ============== -->
 <a href="https://wa.me/+525580313331/?text=Hola%2C%20vi%20el%20sitio%20en%20Google%2C%20quiero%20informaci%C3%B3n%20de%20la%20consulta." target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
@@ -1001,6 +1226,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (!wasOpen) item.classList.add('open');
     });
   });
+
+  // Privacy modal — open on footer link click, close on X / backdrop / ESC
+  var privacyDialog = document.getElementById('privacy-dialog');
+  if (privacyDialog) {
+    document.querySelectorAll('[data-privacy-trigger]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        privacyDialog.showModal();
+      });
+    });
+    privacyDialog.querySelector('[data-privacy-close]').addEventListener('click', function () {
+      privacyDialog.close();
+    });
+    privacyDialog.addEventListener('click', function (e) {
+      // Click on the dialog backdrop (the dialog element itself, not its children)
+      if (e.target === privacyDialog) privacyDialog.close();
+    });
+  }
 
   // Track click on floating WhatsApp bubble → pushes 'whatsapp_click' to dataLayer.
   // GTM (GTM-K26MT7PT) routes this event to GA4 + Google Ads conversion via a

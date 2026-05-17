@@ -12,6 +12,9 @@
 /logo.png
   Cache-Control: public, max-age=31536000, immutable
 
+/logo-dark.png
+  Cache-Control: public, max-age=31536000, immutable
+
 # HTML — short cache, must revalidate so updates ship fast
 /
   Cache-Control: public, max-age=0, must-revalidate
