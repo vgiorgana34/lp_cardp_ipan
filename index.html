@@ -1001,6 +1001,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (!wasOpen) item.classList.add('open');
     });
   });
+
+  // Track click on floating WhatsApp bubble → pushes 'whatsapp_click' to dataLayer.
+  // GTM (GTM-K26MT7PT) routes this event to GA4 + Google Ads conversion via a
+  // custom-event trigger configured in the GTM UI. Works with deferred tracking:
+  // pushes are queued in dataLayer and processed when GTM loads.
+  var waFloat = document.querySelector('.wa-float');
+  if (waFloat) {
+    waFloat.addEventListener('click', function () {
+      (window.dataLayer = window.dataLayer || []).push({
+        event: 'whatsapp_click',
+        source: 'floating_bubble',
+        link_url: waFloat.href
+      });
+    });
+  }
 })();
 </script>
 
