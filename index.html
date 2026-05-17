@@ -26,21 +26,41 @@
 <!-- Sirv still used for below-fold images (lazy-loaded) -->
 <link rel="preconnect" href="https://aigenci.sirv.com" crossorigin>
 
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K26MT7PT');</script>
-<!-- End Google Tag Manager -->
-
-<!-- GA4 (gtag.js) — matches live site config -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P89SR576S9"></script>
+<!-- Deferred tracking — loads on first user interaction or after 3s.
+     Keeps Performance high. dataLayer is initialized immediately so any
+     early pushes are queued for when GTM/GA4 are ready. -->
 <script>
+(function() {
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){window.dataLayer.push(arguments);}
+  window.gtag = gtag;
   gtag('js', new Date());
   gtag('config', 'G-P89SR576S9');
+
+  var loaded = false;
+  function loadTracking() {
+    if (loaded) return; loaded = true;
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s);
+      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K26MT7PT');
+
+    // GA4 (gtag.js)
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=G-P89SR576S9';
+    document.head.appendChild(g);
+  }
+
+  ['scroll','mousemove','touchstart','keydown','click'].forEach(function(evt) {
+    window.addEventListener(evt, loadTracking, { once: true, passive: true });
+  });
+  setTimeout(loadTracking, 3000);
+})();
 </script>
 
 <style>
