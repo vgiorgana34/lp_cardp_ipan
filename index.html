@@ -287,14 +287,16 @@ a { text-decoration: none; color: inherit; }
   background: linear-gradient(to top, rgba(35,75,110,0.12) 0%, transparent 40%);
   pointer-events: none;
 }
-.hero-content h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); margin-bottom: 20px; }
-.hero-content h1 .accent { color: var(--color-accent); }
-.hero-content .hero-desc {
+.hero-content .hero-headline { font-size: clamp(2.2rem, 4vw, 3.4rem); margin-bottom: 20px; font-family: var(--font-heading); font-weight: 700; color: var(--color-heading); line-height: 1.15; }
+.hero-content .hero-headline .accent { color: var(--color-accent); }
+.hero-content h1.hero-desc {
   font-size: 1.05rem;
   color: var(--color-text-light);
   line-height: 1.75;
   margin-bottom: 28px;
   max-width: 520px;
+  font-family: var(--font-body);
+  font-weight: 400;
 }
 .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
 .hero-badge {
@@ -742,7 +744,7 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 600px) {
   :root { --section-py: 56px; --gap: 20px; }
   .hero { min-height: auto; padding-top: 80px; padding-bottom: 40px; }
-  .hero-content h1 { font-size: 2rem; }
+  .hero-content .hero-headline { font-size: 2rem; }
   .hero-cta-row { flex-direction: column; }
   .hero-cta-row > * { width: 100%; justify-content: center; }
   .services-grid { grid-template-columns: 1fr; }
@@ -783,8 +785,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="/hero.avif" alt="Dr. Luis Enrique Estrada atendiendo paciente" loading="eager" fetchpriority="high" width="800" height="767">
     </div>
     <div class="hero-content">
-      <h1 class="anim">Vive sin temor a<br>enfermedades <span class="accent">cardíacas</span></h1>
-      <p class="hero-desc anim">Atención especializada con el <strong>cardiólogo más confiable en Puebla</strong> para tu tranquilidad y bienestar. Formación en Stanford, UNAM y Barcelona. Consulta en Torres Médicas y Hospital Ángeles Puebla.</p>
+      <p class="hero-headline anim" aria-hidden="true">Vive sin temor a<br>enfermedades <span class="accent">cardíacas</span></p>
+      <h1 class="hero-desc anim">Atención especializada con el <strong>cardiólogo más confiable en Puebla</strong> para tu tranquilidad y bienestar. Formación en Stanford, UNAM y Barcelona. Consulta en Torres Médicas y Hospital Ángeles Puebla.</h1>
       <div class="hero-cta-row anim">
         <a href="https://wa.me/+525580313331/?text=Hola%2C%20vi%20el%20sitio%20en%20Google%2C%20quiero%20informaci%C3%B3n%20de%20la%20consulta." target="_blank" rel="noopener" class="btn-wa" data-track="whatsapp_click" data-source="hero">
           Agendar por WhatsApp
