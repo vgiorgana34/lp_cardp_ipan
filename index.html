@@ -808,6 +808,11 @@ a { text-decoration: none; color: inherit; }
   .anchor-dock a.dock-cta svg { width: 20px; height: 20px; fill: #fff; }
   /* El float de WhatsApp desaparece en móvil: su función vive en el dock */
   .wa-float-wrap { display: none; }
+  /* Chrome dinámico: nav fuera al 15% de scroll, dock entra al 20% (solo móvil) */
+  .lp-nav { transition: background var(--transition), box-shadow var(--transition), padding var(--transition), transform 0.35s ease; }
+  .lp-nav.nav-hidden { transform: translateY(-100%); }
+  .anchor-dock { transform: translateY(110%); transition: transform 0.35s ease; }
+  .anchor-dock.dock-visible { transform: translateY(0); }
 }
 
 /* --- ANIMATIONS --- */
@@ -1561,6 +1566,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (sec) spy.observe(sec);
     });
   }
+
+  // Chrome dinamico movil: nav se oculta al 15% de scroll, dock aparece al 20%
+  var dock = document.querySelector('.anchor-dock');
+  var mqMobile = window.matchMedia('(max-width: 767px)');
+  function chromeOnScroll() {
+    if (!mqMobile.matches) {
+      nav.classList.remove('nav-hidden');
+      if (dock) dock.classList.remove('dock-visible');
+      return;
+    }
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? window.scrollY / max : 0;
+    nav.classList.toggle('nav-hidden', p >= 0.15);
+    if (dock) dock.classList.toggle('dock-visible', p >= 0.20);
+  }
+  window.addEventListener('scroll', chromeOnScroll, { passive: true });
+  if (mqMobile.addEventListener) mqMobile.addEventListener('change', chromeOnScroll);
+  chromeOnScroll();
 })();
 </script>
 
