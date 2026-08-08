@@ -287,16 +287,13 @@ a { text-decoration: none; color: inherit; }
   background: linear-gradient(to top, rgba(35,75,110,0.12) 0%, transparent 40%);
   pointer-events: none;
 }
-.hero-content .hero-headline { font-size: clamp(2.2rem, 4vw, 3.4rem); margin-bottom: 20px; font-family: var(--font-heading); font-weight: 700; color: var(--color-heading); line-height: 1.15; }
-.hero-content .hero-headline .accent { color: var(--color-accent); }
-.hero-content h1.hero-desc {
+.hero-content h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); margin-bottom: 20px; }
+.hero-content .hero-desc {
   font-size: 1.05rem;
   color: var(--color-text-light);
   line-height: 1.75;
   margin-bottom: 28px;
   max-width: 520px;
-  font-family: var(--font-body);
-  font-weight: 400;
 }
 .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
 .hero-badge {
@@ -696,10 +693,38 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* --- WHATSAPP FLOAT --- */
+.schedule-hint {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.schedule-hint svg { width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px; fill: var(--color-text-muted); }
+.cta-buttons .schedule-hint { text-align: center; margin-top: 14px; color: rgba(255,255,255,0.5); }
+.cta-buttons .schedule-hint svg { fill: rgba(255,255,255,0.5); }
+.wa-float-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.wa-float-label {
+  background: #fff;
+  color: var(--color-text);
+  font-size: 0.78rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+.wa-float-wrap:hover .wa-float-label { opacity: 1; transform: translateY(0); }
+@media (hover: none) {
+  .wa-float-label { animation: wa-hint-mobile 9s ease 1.2s both; }
+}
+@keyframes wa-hint-mobile {
+  0%, 100% { opacity: 0; transform: translateY(4px); }
+  6%, 82% { opacity: 1; transform: translateY(0); }
+}
 .wa-float {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
   width: 56px;
   height: 56px;
   background: var(--color-whatsapp);
@@ -708,7 +733,6 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 16px rgba(37,211,102,0.4);
-  z-index: 90;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,0.5); }
@@ -744,7 +768,7 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 600px) {
   :root { --section-py: 56px; --gap: 20px; }
   .hero { min-height: auto; padding-top: 80px; padding-bottom: 40px; }
-  .hero-content .hero-headline { font-size: 2rem; }
+  .hero-content h1 { font-size: 2rem; }
   .hero-cta-row { flex-direction: column; }
   .hero-cta-row > * { width: 100%; justify-content: center; }
   .services-grid { grid-template-columns: 1fr; }
@@ -757,6 +781,148 @@ a { text-decoration: none; color: inherit; }
   .btn-nav { padding: 8px 16px; font-size: 0.82rem; }
 }
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "name": "Dr. Luis Enrique Estrada",
+  "alternateName": "IPANCORAZON",
+  "url": "https://cardiologopuebla.ipancorazon.com/",
+  "telephone": "+525580313331",
+  "image": "https://aigenci.sirv.com/IPAN/ABOUT-DRLUIS-IPAN.avif",
+  "medicalSpecialty": "Cardiovascular",
+  "description": "Cardiólogo intervencionista en Puebla. Más de 15 años de experiencia con formación en Stanford, UNAM y Barcelona.",
+  "knowsLanguage": ["es","en"],
+  "sameAs": [
+    "https://www.doctoralia.com.mx/luis-enrique-estrada-martinez/cardiologo/puebla",
+    "https://www.facebook.com/drestradacardio/"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "207",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "location": [
+    {
+      "@type": "MedicalClinic",
+      "name": "Hospital Ángeles Puebla",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Kepler 2143, Torre 1, Piso 15, Cons. 1586",
+        "addressLocality": "Puebla",
+        "postalCode": "72190",
+        "addressCountry": "MX"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "12:00",
+          "closes": "21:00"
+        }
+      ],
+      "image": "https://aigenci.sirv.com/IPAN/UBICACION-ANGELES-IPAN.avif"
+    },
+    {
+      "@type": "MedicalClinic",
+      "name": "Torres Médicas",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Torres Médicas, Torre 1, Piso P, Consultorio 1608, Anillo Periférico Ecológico #3507",
+        "addressLocality": "San Andrés Cholula",
+        "addressRegion": "Puebla",
+        "addressCountry": "MX"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "12:00",
+          "closes": "21:00"
+        }
+      ],
+      "image": "https://aigenci.sirv.com/IPAN/UBICACION-TORRESMED-IPAN.avif"
+    }
+  ],
+  "availableService": [
+    {
+      "@type": "MedicalTest",
+      "name": "Electrocardiograma (ECG)",
+      "description": "Registra la actividad eléctrica del corazón: detecta arritmias, tamaño del corazón y daño al músculo cardíaco."
+    },
+    {
+      "@type": "MedicalTest",
+      "name": "Ecocardiograma",
+      "description": "Utiliza ondas sonoras para crear imágenes en movimiento del corazón: evalúa estructura y función, detecta válvulas dañadas y defectos congénitos."
+    },
+    {
+      "@type": "MedicalTest",
+      "name": "Prueba de esfuerzo",
+      "description": "Evalúa la función cardíaca durante el ejercicio: detecta obstrucciones en las arterias coronarias y ayuda a diagnosticar angina de pecho."
+    },
+    {
+      "@type": "MedicalTest",
+      "name": "Holter",
+      "description": "Registra el ritmo cardíaco durante un período prolongado: detecta arritmias intermitentes que no aparecen en un ECG regular."
+    },
+    {
+      "@type": "MedicalProcedure",
+      "name": "Cateterismo cardíaco",
+      "description": "Permite visualizar el interior de las arterias coronarias, medir la presión sanguínea y realizar angioplastia y colocación de stents."
+    },
+    {
+      "@type": "MedicalProcedure",
+      "name": "Procedimientos de mínima invasión",
+      "description": "Técnicas que acceden al corazón a través de pequeñas incisiones con guía por imágenes: recuperación más rápida y menos complicaciones."
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuál es la diferencia entre un cardiólogo y un cardiólogo intervencionista?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un cardiólogo intervencionista tiene las mismas capacidades que un cardiólogo general, pero además cuenta con alta especialización para realizar procedimientos invasivos y mínimamente invasivos, como angioplastia, colocación de stents y otros procedimientos para tratar arterias bloqueadas, defectos cardíacos y válvulas del corazón. Sin importar tu preocupación, puedes acudir con el Dr. Luis Enrique Estrada para recibir diagnóstico y tratamiento adecuado."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tiempo durará mi cita?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cada cita tiene una duración distinta según la necesidad de la consulta. Usualmente, las citas duran al menos 45 minutos y terminan hasta que todas tus dudas sean resueltas. En caso de estudios o procedimientos, la duración aproximada se te informará antes de acudir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde está ubicado? ¿Puede realizar intervenciones en mi hospital?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El Dr. Estrada tiene consultorio en Torres Médicas (Torre 1, Piso P, Cons. 1608, Anillo Periférico Ecológico #3507, San Andrés Cholula) y en Hospital Ángeles Puebla. Puede realizar procedimientos en los principales hospitales de Puebla y CDMX. Confirma vía WhatsApp si es posible en tu hospital de preferencia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo asistir sin cita previamente agendada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Para evitar tiempos de espera y asegurar que el doctor esté disponible, agendar cita es altamente recomendado. Agendar es muy sencillo y se puede hacer directamente por mensaje de WhatsApp."
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 
@@ -785,8 +951,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="/hero.avif" alt="Dr. Luis Enrique Estrada atendiendo paciente" loading="eager" fetchpriority="high" width="800" height="767">
     </div>
     <div class="hero-content">
-      <p class="hero-headline anim" aria-hidden="true">Vive sin temor a<br>enfermedades <span class="accent">cardíacas</span></p>
-      <h1 class="hero-desc anim">Atención especializada con el <strong>cardiólogo más confiable en Puebla</strong> para tu tranquilidad y bienestar. Formación en Stanford, UNAM y Barcelona. Consulta en Torres Médicas y Hospital Ángeles Puebla.</h1>
+      <h1 class="hero-headline anim">Cardiólogo en Puebla — diagnóstico rápido</h1>
+      <p class="hero-desc anim">Cerca de ti, en Torres Médicas y Hospital Ángeles Puebla. Tu cardiólogo con más de 15 años de experiencia y formación en Stanford, UNAM y Barcelona.</p>
       <div class="hero-cta-row anim">
         <a href="https://wa.me/+525580313331/?text=Hola%2C%20vi%20el%20sitio%20en%20Google%2C%20quiero%20informaci%C3%B3n%20de%20la%20consulta." target="_blank" rel="noopener" class="btn-wa" data-track="whatsapp_click" data-source="hero">
           Agendar por WhatsApp
@@ -797,10 +963,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           558 031 3331
         </a>
       </div>
+      <p class="schedule-hint anim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>L–V 12:00 – 9:00 pm · Sábado con cita previa</p>
       <div class="hero-badge anim">
         <span class="stars">★★★★★</span>
         <span class="score">4.9</span>
-        <span class="label">192 opiniones en Doctoralia</span>
+        <span class="label">207 opiniones en Doctoralia</span>
       </div>
     </div>
   </div>
@@ -937,7 +1104,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="section-header anim">
       <h2>Lo que dicen nuestros pacientes</h2>
-      <p><span style="color:#e8b100;letter-spacing:1px">★★★★★</span> 4.9 · 192 opiniones verificadas en <a href="#" style="color:var(--color-accent)">Doctoralia</a></p>
+      <p><span style="color:#e8b100;letter-spacing:1px">★★★★★</span> 4.9 · 207 opiniones verificadas en <a href="https://www.doctoralia.com.mx/luis-enrique-estrada-martinez/cardiologo/puebla" target="_blank" rel="noopener" style="color:var(--color-accent)">Doctoralia</a></p>
     </div>
     <div class="testimonials-grid stagger">
       <div class="test-card anim">
@@ -1015,6 +1182,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
         558 031 3331
       </a>
+      <p class="schedule-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>L–V 12:00 – 9:00 pm · Sábado con cita previa</p>
     </div>
   </div>
 </section>
@@ -1108,7 +1276,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="footer-trust">
       <span class="stars">★★★★★</span>
       <strong>4.9</strong>
-      <span>192 opiniones verificadas en Doctoralia</span>
+      <span>207 opiniones verificadas en Doctoralia</span>
     </div>
 
     <p class="footer-legal-line">
@@ -1197,9 +1365,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </dialog>
 
 <!-- ============== WHATSAPP FLOAT ============== -->
-<a href="https://wa.me/+525580313331/?text=Hola%2C%20vi%20el%20sitio%20en%20Google%2C%20quiero%20informaci%C3%B3n%20de%20la%20consulta." target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp" data-track="whatsapp_click" data-source="floating_bubble">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.673-1.391A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.756-6.354-2.04l-.443-.34-2.793.832.884-2.87-.373-.466A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-</a>
+<div class="wa-float-wrap">
+  <span class="wa-float-label">L–V 12:00 – 9:00 pm</span>
+  <a href="https://wa.me/+525580313331/?text=Hola%2C%20vi%20el%20sitio%20en%20Google%2C%20quiero%20informaci%C3%B3n%20de%20la%20consulta." target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp" data-track="whatsapp_click" data-source="floating_bubble">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.673-1.391A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.756-6.354-2.04l-.443-.34-2.793.832.884-2.87-.373-.466A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  </a>
+</div>
 
 <script>
 (function () {
